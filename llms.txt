@@ -1,0 +1,14 @@
+# Levi Focus — AI × 硬件 深度研究
+
+> 硬件工程师视角的 AI 深度研究。每篇结论前置、数据可验证。
+> 领域：AI 时空观 / Agent 商业模式 (B2A) / GEO（生成式引擎优化）/ Physical AI / 电子制造供应链
+
+## Articles
+
+- [AI 时代的时空观：20 年推演，压缩到今天该做什么](https://focus688.github.io/levi-focus/ai-spacetime.html) — 四阶段下注框架；AI 时代稀缺的四种能力；10年→5年→3年→3个月逐层压缩与当下动作。核心结论：每个阶段的选择都要留下下一阶段的选择权。
+- [Meta Muse 深度解读：广告帝国自我革命与 B2A 时代的开局](https://focus688.github.io/levi-focus/meta-muse-b2a.html) — Meta 从广告分成转向交易抽成；CapEx 表外去风险；最强模型≠最强产品。核心结论：买家不再只是人，还有 Agent；注意力经济已死，接口经济开始。
+- [从 SEO 到 GEO：开店、做品牌、做自媒体怎么玩转 B2A](https://focus688.github.io/levi-focus/geo-b2a-playbook.html) — Agent 判断五层漏斗；电商 12 个生死字段；自媒体可引用性打法。核心结论：Agent 不猜，字段缺失=出局；把自己写成 AI 非引不可的那块砖。
+
+## Contact
+
+GitHub: https://github.com/Focus688

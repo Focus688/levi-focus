@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>从 SEO 到 GEO：开店、做品牌、做自媒体怎么玩转 B2A — Levi Focus</title>
+<meta name="description" content="Agent 凭什么替用户做判断？电商五层漏斗与 12 个生死字段；自媒体的五层漏斗与 5 个打法——让内容成为 Agent 必须引用的那块砖。">
+<meta name="author" content="Levi Focus">
+<meta name="date" content="2026-09-30">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "从 SEO 到 GEO：开店、做品牌、做自媒体怎么玩转 B2A",
+  "author": {"@type": "Person", "name": "Levi Focus", "url": "https://github.com/Focus688"},
+  "datePublished": "2026-09-30",
+  "dateModified": "2026-09-30",
+  "keywords": "GEO, SEO, B2A, Agentic Commerce, 结构化数据, llms.txt",
+  "description": "电商与自媒体的 GEO 打法：Agent 判断五层漏斗、12 个生死字段、可引用性策略。"
+}
+</script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#0a0a0f;color:#d8d8e0;font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;line-height:2;}
+.wrap{max-width:760px;margin:0 auto;padding:70px 24px 120px;}
+.back{font-size:14px;color:#666;text-decoration:none;}
+.back:hover{color:#00ffd5;}
+h1{font-size:32px;font-weight:800;margin:24px 0 10px;color:#fff;line-height:1.4;}
+.meta{font-size:13px;color:#666;margin-bottom:44px;}
+h2{font-size:21px;font-weight:700;color:#00ffd5;margin:52px 0 16px;}
+h3{font-size:17px;font-weight:700;color:#e8e8ee;margin:32px 0 10px;}
+p{margin:14px 0;color:#b8b8c2;font-size:15.5px;}
+strong{color:#fff;}
+ol,ul{margin:12px 0 12px 22px;color:#b8b8c2;}
+li{margin:8px 0;}
+pre{background:#0f0f17;border:1px solid #1c1c28;border-radius:10px;padding:16px 20px;margin:20px 0;overflow-x:auto;}
+code{font-family:ui-monospace,monospace;font-size:13.5px;color:#7fe8d5;}
+.quote{border-left:3px solid #00ffd5;background:#0f0f17;padding:16px 20px;border-radius:0 8px 8px 0;margin:26px 0;color:#d0e8e2;font-size:16px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="index.html">← 返回首页</a>
+<h1>从 SEO 到 GEO：开店、做品牌、做自媒体怎么玩转 B2A</h1>
+<div class="meta">2026-09-30 · Levi Focus</div>
+
+<p><strong>本质一句话：SEO 卖给人看，GEO（Generative Engine Optimization，生成式引擎优化）卖给机器「读得懂 + 敢担保」。</strong>SEO 的逻辑：关键词 → 排名 → 人被吸引点进来。GEO 的逻辑：Agent 收到用户约束 → 拉结构化数据 → 给候选打分 → 只推荐它「敢负责」的那个。</p>
+
+<p>最关键的一条规则：<strong>Agent 不猜。字段缺失/含糊 = 直接出局，它不会脑补你的产品行不行，直接换下一家。</strong>实测数据：完整 Product schema 的店铺不到 18%——绝大多数品牌在 Agent 眼里是瞎的。而 ChatGPT 已占 Walmart 引荐流量 20%，美零售站 agent 流量同比 +393%。</p>
+
+<h2>一、Agent 怎么判断？五层漏斗（电商）</h2>
+
+<pre><code>找得到 Findable → 读得懂 Readable → 比得了 Comparable → 信得过 Trustworthy → 买得成 Actionable</code></pre>
+
+<ol>
+<li><strong>找得到</strong>：feed、schema、llms.txt、agentic 协议（ACP/UCP）。被索引只是入场券。</li>
+<li><strong>读得懂</strong>：JSON-LD 结构化标记是最高杠杆动作（实测 AI 可读分 +15~20）。JS 渲染的内容 Agent 大多看不见。</li>
+<li><strong>比得了</strong>：可比的事实维度——材质、尺寸、兼容性、认证，不是「premium」这种形容词。</li>
+<li><strong>信得过</strong>（权重最高）：证据等级 = 第三方验证买家评价 > 带署名的 Q&A > 品牌自述文案。你的评价平台如果 schema 输出默认关闭，你的好评对 Agent 就不存在。</li>
+<li><strong>买得成</strong>：价格有效期、库存枚举、运费/退货政策的结构化实体。缺一个 priceValidUntil 字段，Agent 就认为你的价格可能是过期数据而降权。</li>
+</ol>
+
+<p><strong>12 个字段决定生死</strong>：name / gtin / brand / description / image / price / priceValidUntil / availability / shippingDetails / returnPolicy / aggregateRating / reviews。缺哪个就在哪个环节被绕过。</p>
+
+<h2>二、开店/做品牌的准备清单</h2>
+
+<p><strong>数据结构化（基本功）</strong>：12 字段 JSON-LD；feed、schema、页面三源完全一致（自相矛盾=不可信=出局）；llms.txt + agentic 协议接入；评价平台 schema 输出打开。</p>
+
+<p><strong>超越结构化（决定排名）</strong>：</p>
+<ul>
+<li><strong>意图密度</strong>：每个产品自带「回答什么问题、解决什么痛点、适合什么场景」。「Blue Backpack, $49.99」打不过一条写明容量/材质/使用场景的描述。</li>
+<li><strong>评论资产化</strong>：引导买家留带具体场景的评价（「适合宽脚跑马拉松」比「很好」值钱 100 倍）。</li>
+<li><strong>成为「我的常购」</strong>：订阅制、会员、复购锁定——Agent 尊重用户指定的忠诚度，这是打不掉的阵地。</li>
+<li><strong>价格诚实</strong>：Agent 时代没有「先提价再打折」的空间，虚假促销 = 降权出局。</li>
+</ul>
+
+<p><strong>更快</strong> = 数据喂到嘴边：Meta Muse 直接读 Shopify 全目录，不用爬你的网页；agentic feed / A2A Agent Card / Agent Query API 把「Agent 来猜你的网站」变成「你主动推结构化意图数据」。<strong>更准</strong> = 三源一致 + 意图密度 + 可担保性。GEO 的终局：<strong>你的数据质量 = 你的推荐概率。</strong></p>
+
+<h2>三、自媒体怎么玩转 B2A</h2>
+
+<p><strong>自媒体的 GEO = 让你的内容成为 Agent 回答某个问题时「必须引用的那一块砖」。</strong>电商的终局是被 Agent 推荐，内容的终局是被 Agent 引用。引用即流量，且引用没有时效衰减——这就是长尾的新形态。</p>
+
+<h3>Agent 读自媒体的五层漏斗</h3>
+
+<pre><code>可抓取 → 可引用 → 可归因 → 可信赖 → 可溯源</code></pre>
+
+<ol>
+<li><strong>可抓取</strong>：OAI-SearchBot、ClaudeBot、PerplexityBot 抓不抓得到你。JS 渲染≈不存在；公众号全文封闭是硬伤；公开站才有入场券。</li>
+<li><strong>可引用</strong>：带具体数字、结构化清单、直接答案段的内容被引用率远高于散文。</li>
+<li><strong>可归因</strong>：实体识别——名字、账号名、领域标签全网一致且互相印证，实体越清晰越容易被当成「该领域的 source」。</li>
+<li><strong>可信赖</strong>：原创数据 + 可验证结论。实时检索+交叉验证的内容天然是「高引用体」。</li>
+<li><strong>可溯源</strong>：稳定 URL + 发布日期 + 作者实体，Agent 才敢把流量导给你。</li>
+</ol>
+
+<h3>五个打法（按杠杆排序）</h3>
+
+<ol>
+<li><strong>建个人实体站（杠杆最大）</strong>：静态站零成本，每篇内容稳定 URL，服务器端渲染纯 HTML；挂 llms.txt + JSON-LD（Article schema + author 实体 + datePublished）。平台发全文引流，网站存原文供 Agent 采——双轨。</li>
+<li><strong>内容按「问题-答案」结构写</strong>：每篇开头 100 字内给直接结论段（答案前置，论证后置）——维基百科和 Stack Overflow 是 LLM 引用之王就是这个原因。</li>
+<li><strong>占领长尾问题的「唯一好答案」位</strong>：不抢头部问题，占细分长尾（如「硬件工程师转 Physical AI 路线图」）。交叉领域几乎是无人区，先写先被引用。</li>
+<li><strong>把「数据」做成引用磁铁</strong>：纯观点没人引用，独家数据人人引用。把行业实测数据做成公开「小报告」= 自造被 GEO 的资产。</li>
+<li><strong>内容互链成网</strong>：文章互链 + 主题聚合页——主题密度越高，你在这个主题上的权威分越高。</li>
+</ol>
+
+<p><strong>本周可做</strong>：GitHub Pages 起个人站骨架 + 首篇内容挂上去 + llms.txt，一天工作量。平台内容照发，每篇同步挂站——<strong>发一次，喂两个世界（人 + Agent）</strong>。</p>
+
+<div class="quote">SEO 时代比的是谁的广告更动人，GEO 时代比的是谁的数据更诚实——在 Agent 眼里，含糊就是不存在，缺字段就是没资格参赛。平台粉丝是租的，Agent 的引用是买的：一次写好，永久收租。</div>
+
+<p><a href="ai-spacetime.html" style="color:#00ffd5;">相关阅读：AI 时代的时空观——20 年推演，压缩到今天该做什么 →</a></p>
+</div>
+</body>
+</html>
