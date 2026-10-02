@@ -12,3 +12,4 @@
 ## Contact
 
 GitHub: https://github.com/Focus688
+- [接口经济：注意力已死之后，能力怎么卖出钱](https://focus688.github.io/levi-focus/interface-economy.html): 接口经济=能力被AI Agent按次调用并付费。三步入场：能力封装成API、接入MCP协议层、攒独家调用数据。小玩家机会在垂直接口，别囤粉丝囤调用。
