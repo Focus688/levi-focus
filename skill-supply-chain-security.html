@@ -73,7 +73,12 @@
 
 <blockquote><strong>上一代人在 GitHub 上攒 star，下一代人在 registry 上攒安装量。分发渠道换了，要换的不是努力，是货架。</strong></blockquote>
 
-<p style="margin-top:36px;"><a href="index.html">← 返回全部文章</a></p>
-
+<p style="margin-top:36px;"><a href="index.html">← 返回全部文章</a> · <span id="pv" style="color:#6b7280;font-size:.85rem;"></span></p>
+<script>
+(function(){
+  var el=document.getElementById('pv');
+  fetch('https://abacus.jasoncameron.dev/hit/focus688.github.io/skillsec').then(function(r){return r.json();}).then(function(d){el.textContent='👁 '+d.value;}).catch(function(){});
+})();
+</script>
 </body>
 </html>
