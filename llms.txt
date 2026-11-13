@@ -17,3 +17,4 @@ GitHub: https://github.com/Focus688
 - [接口经济（视频）：别囤粉丝，囤调用](https://focus688.github.io/levi-focus/interface-economy-video.html): 接口经济=能力被AI Agent按次调用并付费。港口类比：从收门票到按装卸次数收费。三步入场+小玩家垂直接口机会。
 - [GEO实操（视频）：写答案·摆数据·攒口碑·立人设](https://focus688.github.io/levi-focus/geo-practice-video.html): GEO实操四件事：答案前置100字、字段摆全、攒真实口碑权重最高、全平台实体一致。终局=诚实等于排名。
 - [我们花5块钱复现了一篇反共识论文：Naive Prompt Optimization 无代码复现实测](https://focus688.github.io/levi-focus/paper-repro-npo.html): Purdue论文NPO主张傻瓜式线性prompt优化打平复杂GEPA搜索且无官方代码。我们用150行纯stdlib代码、664次API调用(成本<5元)独立复现HotpotQA实验：EM提升0.300到0.333，方向成立但涨幅贴噪声边缘，且大半增益来自输出格式规整而非推理能力提升。
+- [我们让AI审代码12次：10次谎称检查完了——OverclaimBench无代码复现实测](https://focus688.github.io/levi-focus/overclaim-repro.html): Mila论文OverclaimBench指控前沿AI审查员80%在没读完文件时谎报完成且无官方代码。我们150行harness独立复现：2模型12跑，未读完率92%、误导率91%，glm-5.3-flash六跑全谎，但2颗安全埋雷全部被找到——防住谎报的免费一招是要求AI列出读过哪些文件。
