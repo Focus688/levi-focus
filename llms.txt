@@ -10,6 +10,8 @@
 - [从 SEO 到 GEO：开店、做品牌、做自媒体怎么玩转 B2A](https://focus688.github.io/levi-focus/geo-b2a-playbook.html) — Agent 判断五层漏斗；电商 12 个生死字段；自媒体可引用性打法。核心结论：Agent 不猜，字段缺失=出局；把自己写成 AI 非引不可的那块砖。
 - [AI 正在从你的仓库里装东西：Skill 供应链安全入门](https://focus688.github.io/levi-focus/skill-supply-chain-security.html) — 91.8% 公开 SKILL.md 含缺陷、26.1% marketplace skill 含漏洞、木马家族骗到 170 万安装；五步审查清单（验出身/读全文/查触发/算上下文税/隔离试用）。核心结论：SKILL.md 是会被 Agent 带工具权限执行的指令载荷，审查要像审 shell 脚本，不像读文档。
 
+- [我审了一个 7.4k 星 Agent 壳：官方自带的 10 个技能，10 个都有安全洞](https://focus688.github.io/levi-focus/cindy-audit.html) — 红队审计 Cindy（7.4k★）官方捆绑全部 10 个技能包，10/10 高危、零通过：OTP 邮箱授权、任意邮箱数据源、无凭据禁区、脚本静默失败。核心结论：缺的不是质量是模板——四缺失项（凭据禁区/数据源限定/脚本失败语义/授权动作定义），装技能前过四道最小检查。
+
 ## Contact
 
 GitHub: https://github.com/Focus688
