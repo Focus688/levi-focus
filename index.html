@@ -78,6 +78,12 @@ footer a:hover{color:#00ffd5;}
     <div class="answer">直接答案：SKILL.md 是会被 Agent 带工具权限执行的指令载荷，审查它要像审查 shell 脚本而非读教程。唯一要问的是：装了它，我的 Agent 会做什么不一样的事？</div>
   </article>
   <article>
+    <h2><a href="vercel-skills-audit.html">我审了 39.3k 星的 skills CLI：0 高危，但 370 万安装量的分发入口没有守门</a></h2>
+    <div class="meta"><span class="tag">Agent安全</span><span class="tag">供应链审计</span>2026-11-14 · Levi Focus</div>
+    <p>供应链安全审计 vercel-labs/skills（39.3k★）：3 技能 + CLI 源码，0 high、4 med。Cindy 缺写技能的纪律，vercel 缺分发守门——370 万安装量的 find-skills 入口正是上下游接缝。</p>
+    <div class="answer">直接答案：上游缺纪律，下游缺守门，安全在接缝处失守。装技能前先审分发渠道四步：查遥测披露、查 -y 默认动作、拆穿安装量/star 信任信号、查落盘 scripts/。</div>
+  </article>
+  <article>
     <h2><a href="cindy-audit.html">我审了一个 7.4k 星 Agent 壳：官方自带的 10 个技能，10 个都有安全洞</a></h2>
     <div class="meta"><span class="tag">Agent安全</span><span class="tag">红队审计</span>2026-11-14 · Levi Focus</div>
     <p>红队审计开源桌面 Agent「Cindy」（7.4k★）官方捆绑的全部 10 个技能包：10 个全部高危、零个通过。缺陷共享同一模板——缺凭据禁区、数据源限定、脚本失败语义、授权动作定义。</p>
@@ -95,6 +101,7 @@ footer a:hover{color:#00ffd5;}
 <ul><li><a href="interface-economy-video.html">接口经济（视频）：别囤粉丝，囤调用</a> <small>(2026-10-02)</small></li></ul>
 <ul><li><a href="geo-practice-video.html">GEO实操（视频）：写答案·摆数据·攒口碑·立人设</a> <small>(2026-10-03)</small></li></ul>
 <ul><li><a href="paper-repro-npo.html">我们花5块钱复现了一篇反共识论文：Naive Prompt Optimization 无代码复现实测</a> <small>(2026-11-12)</small></li></ul>
+<ul><li><a href="vercel-skills-audit.html">我审了 39.3k 星的 skills CLI：0 高危，但 370 万安装量的分发入口没有守门</a> <small>(2026-11-14)</small></li></ul>
 <ul><li><a href="cindy-audit.html">我审了一个 7.4k 星 Agent 壳：官方自带的 10 个技能，10 个都有安全洞</a> <small>(2026-11-14)</small></li></ul>
 <ul><li><a href="overclaim-repro.html">我们让AI审代码12次：10次谎称检查完了——OverclaimBench无代码复现实测</a> <small>(2026-11-13)</small></li></ul>
 </body>
