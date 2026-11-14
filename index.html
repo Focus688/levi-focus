@@ -77,6 +77,12 @@ footer a:hover{color:#00ffd5;}
     <p>100 万个 SKILL.md、26% 含漏洞、扫描器全部失守——增长最快的软件分发品类配着最烂的质检。五步审查清单：验出身、读全文、查触发、算上下文税、隔离试用。</p>
     <div class="answer">直接答案：SKILL.md 是会被 Agent 带工具权限执行的指令载荷，审查它要像审查 shell 脚本而非读教程。唯一要问的是：装了它，我的 Agent 会做什么不一样的事？</div>
   </article>
+  <article>
+    <h2><a href="cindy-audit.html">我审了一个 7.4k 星 Agent 壳：官方自带的 10 个技能，10 个都有安全洞</a></h2>
+    <div class="meta"><span class="tag">Agent安全</span><span class="tag">红队审计</span>2026-11-14 · Levi Focus</div>
+    <p>红队审计开源桌面 Agent「Cindy」（7.4k★）官方捆绑的全部 10 个技能包：10 个全部高危、零个通过。缺陷共享同一模板——缺凭据禁区、数据源限定、脚本失败语义、授权动作定义。</p>
+    <div class="answer">直接答案：缺的不是质量是模板。官方模板缺四样防线，10 个技能就 10 个高危——装任何技能前先过四道检查：找凭据路径、找脚本依赖、找"已批准"、装前快照装后卸载。</div>
+  </article>
 </section>
 
 <footer>
@@ -89,6 +95,7 @@ footer a:hover{color:#00ffd5;}
 <ul><li><a href="interface-economy-video.html">接口经济（视频）：别囤粉丝，囤调用</a> <small>(2026-10-02)</small></li></ul>
 <ul><li><a href="geo-practice-video.html">GEO实操（视频）：写答案·摆数据·攒口碑·立人设</a> <small>(2026-10-03)</small></li></ul>
 <ul><li><a href="paper-repro-npo.html">我们花5块钱复现了一篇反共识论文：Naive Prompt Optimization 无代码复现实测</a> <small>(2026-11-12)</small></li></ul>
+<ul><li><a href="cindy-audit.html">我审了一个 7.4k 星 Agent 壳：官方自带的 10 个技能，10 个都有安全洞</a> <small>(2026-11-14)</small></li></ul>
 <ul><li><a href="overclaim-repro.html">我们让AI审代码12次：10次谎称检查完了——OverclaimBench无代码复现实测</a> <small>(2026-11-13)</small></li></ul>
 </body>
 </html>
