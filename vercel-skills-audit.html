@@ -12,7 +12,7 @@
   "headline": "我审了 39.3k 星的 skills CLI：0 高危，但 370 万安装量的分发入口没有守门",
   "author": {"@type": "Person", "name": "Levi Focus"},
   "datePublished": "2026-11-14",
-  "dateModified": "2026-11-14",
+  "dateModified": "2026-11-18",
   "keywords": "supply chain security, SKILL.md, skills CLI, vercel, agent security, telemetry, red team",
   "inLanguage": "zh-CN"
 }
@@ -35,7 +35,7 @@
 <body>
 
 <h1>我审了 39.3k 星的 skills CLI：0 高危，但 370 万安装量的分发入口没有守门</h1>
-<p class="meta">Levi Focus · 2026-11-14 · 审计对象：github.com/vercel-labs/skills（39.3k★）3 技能 + CLI 源码 · 工具：skill-review-checklist 八维检查表 · paper-repro 系列第 03 篇</p>
+<p class="meta">Levi Focus · 2026-11-14 首发 / 2026-11-18 v3 实弹复测更新 · 审计对象：github.com/vercel-labs/skills（39.3k★）3 技能 + CLI 源码 · 工具：skill-review-checklist 八维检查表 · paper-repro 系列第 03 篇 · <strong style="color:#c0392b;">v3（2026-11-18）：新增「实弹复测」一节——v2 审计的 HIGH-1 已用三个受控实验实锤：65 秒无超时挂死、4.6MB 工件炸出 2.75GB 峰值内存。</strong></p>
 
 <blockquote>
 <p>答案前置：2026 年 11 月 14 日，我用 skill-review-checklist 八维检查表对 github.com/vercel-labs/skills（约 39.3k★）做了供应链安全审计。结果：3 个技能 + CLI 源码，0 个 high、4 个 med，pr-labeling 一个技能干净通过。单看数字比上一轮 Cindy 审计（10/10 high）体面得多。但这轮审计的头条不是缺陷清单，而是一个结构性判断：<strong>Cindy 缺的是"写技能的纪律"——模板级四缺失，10/10 复现；vercel 缺的是"分发守门"——代码里的防御意识很强，风险全部集中在面向最终用户的分发入口上。两种失败模式，在生态上下游的接缝处互相放大。</strong></p>
@@ -134,10 +134,32 @@ The <code>-g</code> flag installs globally (user-level) and -y skips confirmatio
 <li><strong>查落盘内容</strong>：装完 <code>ls</code> 一下技能目录，看有没有你没预期的 <code>scripts/</code>、可执行文件、网络钩子 URL。技能包里的任意支持文件都会原样落盘，没人替你扫。</li>
 </ol>
 <p>这四条来自我们开源的 skill-review-checklist 与 secure-addon-install（github.com/Focus688/agent-security-skills），本次审计即按此执行。</p>
+<h2>v3 实弹复测（2026-11-18）：HIGH-1 三个实验全部复现</h2>
+<p>答案前置：v2 审计（2026-11-14）只做了静态源码审读，当时 HIGH-1「well-known 工件下载无超时/无大小上限」的行为影响还是推演。2026-11-18 我们补做了三个受控实验（环境：Ubuntu 22.04 / node v22.22.3 / skills CLI 1.9.0），结论是：<strong>① 试装/卸载链路完整可用（PASS）；② 慢速滴流挂死复现——工件下载 fetch 无任何超时，65 秒后仍卡死，只能被外部 timeout 杀掉（exit 124）；③ gzip 炸弹复现——4.6MB 工件解压成 1GB，端到端峰值 RSS 2.75GB，而 50MB 解压上限只在解压完成后才触发，且报错被吞成 SCOPE_NOT_FOUND。</strong></p>
+<h3>实验 0 · 试装验证：装/卸链路可用 ✓</h3>
+<p><code>npx skills add vercel-labs/skills --list</code> 列出 1 个 skill（find-skills），exit 0；<code>--skill find-skills</code> 安装完成，落盘 <code>./.agents/skills/find-skills/SKILL.md</code> + <code>skills-lock.json</code>；<code>npx skills remove find-skills --yes</code> 干净卸载，lock 中 skills 为空。v2 局限性声明里的「未试装」这一条，v3 已消除。</p>
+<h3>实验 1 · 慢速滴流无超时挂死：复现 ✓（65 秒卡死）</h3>
+<p>源码定位（<code>src/providers/wellknown.ts</code>）：L508 <code>fetch(entry.artifactUrl)</code> 无任何 AbortSignal/timeout（对照：index 发现 L183 有 10s 超时，git 通道有 CLONE_TIMEOUT_MS，唯独工件下载没有）；L512 <code>arrayBuffer()</code> 无大小上限。本地 127.0.0.1:8811 伪造 well-known endpoint（v0.2.0 schema），<code>/drip.tar.gz</code> 以 1KB/s 滴流、Content-Length 10GB：</p>
+<pre><code>$ timeout 65 npx -y skills@latest add http://127.0.0.1:8811/test --yes
+◒  Discovering skills from well-known endpoint…（持续转圈 65s）
+exit=124 elapsed=65s   # 被 timeout 杀掉，进程自身永不超时</code></pre>
+<p><strong>判定：60 秒未完成即挂死，复现成立——恶意 well-known 源可以用慢速响应无限占用 CLI，在 agent 场景里占用的就是 agent 的主循环。</strong></p>
+<h3>实验 2 · gzip 炸弹无 maxOutputLength：复现 ✓（4.6MB → 1GB → 2.75GB RSS）</h3>
+<p>构造 4.6MB 的 tar.gz（解压后 1GB：1GB 零填充 SKILL.md，gzip -1），两层验证：</p>
+<p><strong>API 层（直接调源码同款 <code>gunzipSync</code>）：</strong></p>
+<pre><code>compressed bytes: 4685598
+gunzipSync(no limit) OK, decompressed: 1073745920 bytes, in 1648 ms   # 与 wellknown.ts:754 一致，无上限
+gunzipSync(maxOutputLength:50MB) throws: ERR_BUFFER_TOO_LARGE         # Node zlib 原生支持该选项，源码只是没用</code></pre>
+<p><strong>端到端（index 指向炸弹工件，digest 校验通过）：</strong></p>
+<pre><code>$ /usr/bin/time -v npx -y skills@latest add http://127.0.0.1:8812/test --yes
+Maximum resident set size: 2753964 kB   # 4.6MB 下载 → 2.75GB 峰值内存
+[SKILLS_WELLKNOWN_SCOPE_NOT_FOUND] No matching skills…   # 50MB 限制在解压后才触发，错误还被吞成 SCOPE_NOT_FOUND</code></pre>
+<p><strong>判定：<code>gunzipSync</code> 未传 <code>maxOutputLength</code>，50MB 上限是事后检查而非解压时约束——~5MB 恶意工件即可把 CLI 内存推到 ~2.7GB（1GB 炸弹在 3GB 内存机器已近极限，&gt;2GB 炸弹可 OOM），且触发后的报错被折叠成 SCOPE_NOT_FOUND，直接误导排查方向。</strong></p>
+<p>修复建议维持 v2 判断：工件 fetch 加 <code>AbortSignal.timeout()</code>；流式限长替代 <code>arrayBuffer()</code>；<code>gunzipSync</code> 传 <code>maxOutputLength</code>，并让 ARCHIVE_TOO_LARGE 等诊断错误透传而非折叠为 SCOPE_NOT_FOUND。</p>
 <h2>局限性声明</h2>
 <ul>
 <li><strong>未审 agent-skills 仓</strong>：文章语境里的「2.3MB 技能集主体」是 vercel-labs/agent-skills，本次克隆只拿到 CLI 仓库，find-skills 推荐源的实际内容未核。</li>
-<li><strong>未试装</strong>：实测仅限静态源码与文本；<code>npx skills add</code> 未做试装（磁盘 92%，且试装需隔离环境）——F-01/F-09 的风险路径为代码+文本实证，行为影响为推演。</li>
+<li><strong>未试装（v3 已消除）</strong>：v2 实测仅限静态源码与文本；v3（2026-11-18）已补试装验证（PASS）与 HIGH-1 两个受控复现实验（见「实弹复测」一节）。</li>
 <li><strong>审计时点</strong>：2026-11-14，@ main；vercel 迭代很快，结论有时效性。</li>
 <li><strong>推演 vs 实测边界</strong>：全文凡「推演」标注处（F-01/F-02 影响面、F-03 影响面、F-04 影响面、接缝链路）只证明"指令/代码允许这样走"，不证明"已有人这样走"。凡「实测」标注处（telemetry.ts、sanitize.ts、use.test.ts、隐藏扫描）有源码级证据。</li>
 <li>.vc/.automations 双副本的生成链（.automations/config.yml）未深挖。</li>
