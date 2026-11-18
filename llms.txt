@@ -12,7 +12,7 @@
 
 - [我审了一个 7.4k 星 Agent 壳：官方自带的 10 个技能，10 个都有安全洞](https://focus688.github.io/levi-focus/cindy-audit.html) — 红队审计 Cindy（7.4k★）官方捆绑全部 10 个技能包，10/10 高危、零通过：OTP 邮箱授权、任意邮箱数据源、无凭据禁区、脚本静默失败。核心结论：缺的不是质量是模板——四缺失项（凭据禁区/数据源限定/脚本失败语义/授权动作定义），装技能前过四道最小检查。
 
-- [我审了 39.3k 星的 skills CLI：0 高危，但 370 万安装量的分发入口没有守门](https://focus688.github.io/levi-focus/vercel-skills-audit.html) — 供应链审计 vercel-labs/skills（39.3k★）：3 技能+CLI 源码，0 high、4 med；查询原话默认遥测未披露、find-skills 教 -y 跳过确认、把安装量/star 当安全信号、scripts/ 原样落盘不扫描。核心结论：上游缺纪律、下游缺守门，安全在接缝处失守；装技能前审分发渠道四步。
+- [我审了 39.3k 星的 skills CLI：0 高危，但 370 万安装量的分发入口没有守门](https://focus688.github.io/levi-focus/vercel-skills-audit.html) — 供应链审计 vercel-labs/skills（39.3k★）：3 技能+CLI 源码，0 high、4 med；查询原话默认遥测未披露、find-skills 教 -y 跳过确认、把安装量/star 当安全信号、scripts/ 原样落盘不扫描。v3（2026-11-18）实弹复测：HIGH-1 三个实验全部复现——试装 PASS、慢速滴流 65s 无超时挂死（exit 124）、4.6MB gzip 炸弹解压 1GB、端到端峰值 RSS 2.75GB，50MB 上限事后触发且报错被吞成 SCOPE_NOT_FOUND。核心结论：上游缺纪律、下游缺守门，安全在接缝处失守；装技能前审分发渠道四步。
 
 ## Contact
 
