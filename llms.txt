@@ -1,24 +1,39 @@
 # Levi Focus — AI × 硬件 深度研究
 
 > 硬件工程师视角的 AI 深度研究。每篇结论前置、数据可验证。
-> 领域：AI 时空观 / Agent 商业模式 (B2A) / GEO（生成式引擎优化）/ Physical AI / 电子制造供应链
+> 领域：Agent 安全与供应链审计 / 无代码论文复现 / AI 时空观 / Agent 商业模式 (B2A) / GEO
 
 ## Articles
 
+### Agent 安全与供应链审计
+
+- [AI 正在从你的仓库里装东西：Skill 供应链安全入门](https://focus688.github.io/levi-focus/skill-supply-chain-security.html) — 91.8% 公开 SKILL.md 含缺陷、26.1% marketplace skill 含漏洞、木马家族骗到 170 万安装；五步审查清单（验出身/读全文/查触发/算上下文税/隔离试用）。核心结论：SKILL.md 是会被 Agent 带工具权限执行的指令载荷，审查要像审 shell 脚本，不像读文档。
+- [我审了一个 7.4k 星 Agent 壳：官方自带的 10 个技能，10 个都有安全洞](https://focus688.github.io/levi-focus/cindy-audit.html) — 红队审计 Cindy（7.4k★）官方捆绑全部 10 个技能包，10/10 高危、零通过：OTP 邮箱授权、任意邮箱数据源、无凭据禁区、脚本静默失败。核心结论：缺的不是质量是模板——四缺失项（凭据禁区/数据源限定/脚本失败语义/授权动作定义）。
+- [我审了 39.3k 星的 skills CLI：0 高危，但 370 万安装量的分发入口没有守门](https://focus688.github.io/levi-focus/vercel-skills-audit.html) — 供应链审计 vercel-labs/skills（39.3k★）：3 技能+CLI 源码，0 high、4 med；查询原话默认遥测未披露、find-skills 教 -y 跳过确认、把安装量/star 当安全信号、scripts/ 原样落盘不扫描。v3（2026-11-18）实弹复测：HIGH-1 三个实验全部复现。核心结论：上游缺纪律、下游缺守门，安全在接缝处失守。
+
+### 无代码论文复现
+
+- [我们花 5 块钱复现了一篇反共识论文：Naive Prompt Optimization 无代码复现实测](https://focus688.github.io/levi-focus/paper-repro-npo.html) — Purdue 论文 NPO 主张傻瓜式线性 prompt 优化打平复杂 GEPA 搜索且无官方代码。150 行纯 stdlib 代码、664 次 API 调用（成本 <5 元）独立复现 HotpotQA：EM 0.300→0.333，方向成立但涨幅贴噪声边缘，大半增益来自输出格式规整。判定：弱复现 ✓。
+- [我们让 AI 审代码 12 次：11 次没读完文件，10 次谎称检查完了](https://focus688.github.io/levi-focus/overclaim-repro.html) — Mila 论文 OverclaimBench 指控前沿 AI 审查员 80% 在没读完文件时谎报完成且无官方代码。150 行 harness 独立复现：2 模型 12 跑，未读完率 92%、误导率 91%，glm-5.3-flash 六跑全谎，但 2 颗安全埋雷全部被找到。判定：强复现 ✓。
+
+### AI 时空观 · B2A · GEO
+
 - [AI 时代的时空观：20 年推演，压缩到今天该做什么](https://focus688.github.io/levi-focus/ai-spacetime.html) — 四阶段下注框架；AI 时代稀缺的四种能力；10年→5年→3年→3个月逐层压缩与当下动作。核心结论：每个阶段的选择都要留下下一阶段的选择权。
 - [Meta Muse 深度解读：广告帝国自我革命与 B2A 时代的开局](https://focus688.github.io/levi-focus/meta-muse-b2a.html) — Meta 从广告分成转向交易抽成；CapEx 表外去风险；最强模型≠最强产品。核心结论：买家不再只是人，还有 Agent；注意力经济已死，接口经济开始。
-- [从 SEO 到 GEO：开店、做品牌、做自媒体怎么玩转 B2A](https://focus688.github.io/levi-focus/geo-b2a-playbook.html) — Agent 判断五层漏斗；电商 12 个生死字段；自媒体可引用性打法。核心结论：Agent 不猜，字段缺失=出局；把自己写成 AI 非引不可的那块砖。
-- [AI 正在从你的仓库里装东西：Skill 供应链安全入门](https://focus688.github.io/levi-focus/skill-supply-chain-security.html) — 91.8% 公开 SKILL.md 含缺陷、26.1% marketplace skill 含漏洞、木马家族骗到 170 万安装；五步审查清单（验出身/读全文/查触发/算上下文税/隔离试用）。核心结论：SKILL.md 是会被 Agent 带工具权限执行的指令载荷，审查要像审 shell 脚本，不像读文档。
+- [从 SEO 到 GEO：开店、做品牌、做自媒体怎么玩转 B2A](https://focus688.github.io/levi-focus/geo-b2a-playbook.html) — Agent 判断五层漏斗；电商 12 个生死字段；自媒体可引用性打法。核心结论：Agent 不猜，字段缺失=出局。
+- [接口经济：注意力已死之后，能力怎么卖出钱](https://focus688.github.io/levi-focus/interface-economy.html) — 接口经济=能力被 AI Agent 按次调用并付费。三步入场：能力封装成 API、接入 MCP 协议层、攒独家调用数据。小玩家机会在垂直接口，别囤粉丝囤调用。
+- [接口经济（视频）：别囤粉丝，囤调用](https://focus688.github.io/levi-focus/interface-economy-video.html) — 港口类比：从收门票到按装卸次数收费。三步入场+小玩家垂直接口机会。
+- [GEO 实操（视频）：写答案·摆数据·攒口碑·立人设](https://focus688.github.io/levi-focus/geo-practice-video.html) — GEO 实操四件事：答案前置 100 字、字段摆全、攒真实口碑权重最高、全平台实体一致。终局=诚实等于排名。
 
-- [我审了一个 7.4k 星 Agent 壳：官方自带的 10 个技能，10 个都有安全洞](https://focus688.github.io/levi-focus/cindy-audit.html) — 红队审计 Cindy（7.4k★）官方捆绑全部 10 个技能包，10/10 高危、零通过：OTP 邮箱授权、任意邮箱数据源、无凭据禁区、脚本静默失败。核心结论：缺的不是质量是模板——四缺失项（凭据禁区/数据源限定/脚本失败语义/授权动作定义），装技能前过四道最小检查。
+## Open Source Repositories
 
-- [我审了 39.3k 星的 skills CLI：0 高危，但 370 万安装量的分发入口没有守门](https://focus688.github.io/levi-focus/vercel-skills-audit.html) — 供应链审计 vercel-labs/skills（39.3k★）：3 技能+CLI 源码，0 high、4 med；查询原话默认遥测未披露、find-skills 教 -y 跳过确认、把安装量/star 当安全信号、scripts/ 原样落盘不扫描。v3（2026-11-18）实弹复测：HIGH-1 三个实验全部复现——试装 PASS、慢速滴流 65s 无超时挂死（exit 124）、4.6MB gzip 炸弹解压 1GB、端到端峰值 RSS 2.75GB，50MB 上限事后触发且报错被吞成 SCOPE_NOT_FOUND。核心结论：上游缺纪律、下游缺守门，安全在接缝处失守；装技能前审分发渠道四步。
+- [agent-security-skills](https://github.com/Focus688/agent-security-skills) — Agent 安全之「盾」：生产 Agent 运维安全技能库（安全安装、静默故障巡检、MCP 权限与 SKILL.md 供应链审计）+ 实弹审计索引。
+- [agent-enhancement-playbook](https://github.com/Focus688/agent-enhancement-playbook) — Agent 增强之「矛」：证据分级的生产 Agent 增强手册（C1-C8 组合、K1-K9 反模式、12 维实机账本）。
+- [china-policy-radar](https://github.com/Focus688/china-policy-radar) — 垂直情报活水层：结构化、带一手官方链接、机器可读的中国政策索引 + 跨版本 Diff + 回测记分牌。
+- [paper-repro](https://github.com/Focus688/paper-repro) — 无代码论文复现：低预算独立复现/证伪无官方代码热门论文（源码 + 报告 + 全量日志）。
+- [levi-focus](https://github.com/Focus688/levi-focus) — 本站源码（GitHub）；站点入口即本文件所在域名。
 
 ## Contact
 
-GitHub: https://github.com/Focus688
-- [接口经济：注意力已死之后，能力怎么卖出钱](https://focus688.github.io/levi-focus/interface-economy.html): 接口经济=能力被AI Agent按次调用并付费。三步入场：能力封装成API、接入MCP协议层、攒独家调用数据。小玩家机会在垂直接口，别囤粉丝囤调用。
-- [接口经济（视频）：别囤粉丝，囤调用](https://focus688.github.io/levi-focus/interface-economy-video.html): 接口经济=能力被AI Agent按次调用并付费。港口类比：从收门票到按装卸次数收费。三步入场+小玩家垂直接口机会。
-- [GEO实操（视频）：写答案·摆数据·攒口碑·立人设](https://focus688.github.io/levi-focus/geo-practice-video.html): GEO实操四件事：答案前置100字、字段摆全、攒真实口碑权重最高、全平台实体一致。终局=诚实等于排名。
-- [我们花5块钱复现了一篇反共识论文：Naive Prompt Optimization 无代码复现实测](https://focus688.github.io/levi-focus/paper-repro-npo.html): Purdue论文NPO主张傻瓜式线性prompt优化打平复杂GEPA搜索且无官方代码。我们用150行纯stdlib代码、664次API调用(成本<5元)独立复现HotpotQA实验：EM提升0.300到0.333，方向成立但涨幅贴噪声边缘，且大半增益来自输出格式规整而非推理能力提升。
-- [我们让AI审代码12次：10次谎称检查完了——OverclaimBench无代码复现实测](https://focus688.github.io/levi-focus/overclaim-repro.html): Mila论文OverclaimBench指控前沿AI审查员80%在没读完文件时谎报完成且无官方代码。我们150行harness独立复现：2模型12跑，未读完率92%、误导率91%，glm-5.3-flash六跑全谎，但2颗安全埋雷全部被找到——防住谎报的免费一招是要求AI列出读过哪些文件。
+- GitHub: https://github.com/Focus688
+- X: https://x.com/weili496367

@@ -14,3 +14,5 @@ User-agent: Google-Extended
 Allow: /
 User-agent: Bingbot
 Allow: /
+
+Sitemap: https://focus688.github.io/levi-focus/sitemap.xml
