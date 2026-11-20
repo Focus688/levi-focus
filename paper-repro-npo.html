@@ -13,13 +13,15 @@ blockquote{border-left:4px solid #2E7D4F;margin:0;padding:4px 16px;color:#555;ba
 table{border-collapse:collapse;width:100%} th,td{border:1px solid #ddd;padding:8px}
 footer{margin-top:3em;color:#888;font-size:.9em;border-top:1px solid #eee;padding-top:1em}
 </style>
+<link rel="stylesheet" href="assets/site.css">
 </head>
 <body>
+<div class="site-nav"><a href="./">← Levi Focus 首页</a></div>
 <h1>我们花5块钱复现了一篇反共识论文：Naive Prompt Optimization 无代码复现实测</h1>
 <p><em>2026-11-12 · Levi Focus</em></p>
-<blockquote>t; 无官方代码复现系列 · 第 01 篇</blockquote>
-<blockquote>t; 论文：Naive Prompt Optimization（arXiv:2608.27266，Purdue，2026）</blockquote>
-<blockquote>t; 复现代码：纯 Python 标准库 150 行，零依赖</blockquote>
+<blockquote>无官方代码复现系列 · 第 01 篇</blockquote>
+<blockquote>论文：Naive Prompt Optimization（arXiv:2608.27266，Purdue，2026）</blockquote>
+<blockquote>复现代码：纯 Python 标准库 150 行，零依赖</blockquote>
 <h2>一句话结论</h2>
 <p><strong>方向对，量级存疑：NPO 这套&quot;傻瓜式&quot;prompt 优化循环确实便宜好用、能涨分，但小预算下涨幅小到接近噪声；而且它学到的最大一部分改进，居然是&quot;让模型闭嘴只说答案&quot;。</strong></p>
 <h2>这篇论文在反谁</h2>
@@ -34,8 +36,8 @@ footer{margin-top:3em;color:#888;font-size:.9em;border-top:1px solid #eee;paddin
 <p><strong>3. 最有价值的一课是免费的。</strong> 教师模型迭代到第 3 轮，自己收敛出一条极简 prompt：&quot;只输出一行 Answer: xxx，不许推理、不许外部知识、必须锚定上下文&quot;。测试发现这一条格式约束本身就值 2~3 个点。<strong>你不用跑优化循环，直接抄这条 prompt 就行。</strong> 这也解释了 NPO 增益里有多少是真&quot;能力提升&quot;、多少只是&quot;输出规整&quot;——论文 3.4 节专门自查&quot;prompt 是否泄漏答案&quot;，说明作者心里也打鼓。</p>
 <h2>该不该用 NPO</h2>
 <p>该。它是目前性价比最高的 prompt 优化基线：150 行代码、任何 API key 都能跑、没有 GEPA 那套基建。但设好预期：¥5 预算买方向，¥100+ 预算才买论文级涨幅。以及永远记住——<strong>优化器学到的&quot;最好的 prompt&quot;，经常只是教会模型好好说话，而不是变聪明。</strong></p>
-<p>---</p>
-<p>*复现报告（完整数据表、代码、全部 rollout 轨迹与日志）：见仓库 repro/ 目录。无官方代码复现系列第 02 篇选题征集中。*</p>
+<hr>
+<p><em>复现报告（完整数据表、代码、全部 rollout 轨迹与日志）：<a href="https://github.com/Focus688/paper-repro/tree/main/npo">github.com/Focus688/paper-repro/npo</a>。无官方代码复现系列第 02 篇：<a href="overclaim-repro.html">OverclaimBench 复现</a>。</em></p>
 
 <footer><a href="https://focus688.github.io/levi-focus/index.html">← 返回首页</a> · 内容遵循 GEO 规范：答案前置、证据可溯、结构化数据完整</footer>
 </body>

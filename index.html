@@ -4,14 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Levi Focus · AI × 硬件 深度研究</title>
-<meta name="description" content="硬件工程师视角的 AI 深度研究：AI 时空观、Agent 商业模式（B2A）、GEO（生成式引擎优化）、Physical AI。每篇结论前置、数据可验证。">
+<meta name="description" content="硬件工程师视角的 AI 深度研究：AI 时空观、Agent 商业模式（B2A）、GEO（生成式引擎优化）、Physical AI、Agent 安全审计与无代码论文复现。每篇结论前置、数据可验证。">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "Person",
   "name": "Levi Focus",
   "url": "https://focus688.github.io/levi-focus/",
-  "knowsAbout": ["AI Agents", "Agentic Commerce", "GEO", "Physical AI", "Hardware", "BOM", "Electronics Manufacturing"],
+  "knowsAbout": ["AI Agents", "Agentic Commerce", "GEO", "Physical AI", "Hardware", "BOM", "Electronics Manufacturing", "AI Agent Security"],
   "description": "硬件工程师背景的 AI 研究者，关注 AI 时代的商业结构变化与个人布局。"
 }
 </script>
@@ -38,17 +38,61 @@ footer{margin-top:100px;border-top:1px solid #1c1c26;padding-top:28px;font-size:
 footer a{color:#777;text-decoration:none;margin-right:20px;}
 footer a:hover{color:#00ffd5;}
 </style>
+<link rel="stylesheet" href="assets/site.css">
 </head>
 <body>
 <div class="wrap">
 <header>
   <h1>Levi <span>Focus</span></h1>
   <div class="tagline">硬件工程师视角的 AI 深度研究 · 每篇结论前置、数据可验证</div>
-  <div class="topics"><b>AI 时空观</b> · <b>Agent 商业模式 (B2A)</b> · <b>GEO</b> · <b>Physical AI</b> · <b>电子制造</b></div>
+  <div class="topics"><b>AI 时空观</b> · <b>Agent 商业模式 (B2A)</b> · <b>GEO</b> · <b>Agent 安全审计</b> · <b>无代码论文复现</b></div>
 </header>
 
 <section>
-  <div class="sec-title">Articles</div>
+  <div class="sec-title">Agent 安全与供应链审计</div>
+
+  <article>
+    <h2><a href="skill-supply-chain-security.html">AI 正在从你的仓库里装东西：Skill 供应链安全入门</a></h2>
+    <div class="meta"><span class="tag">Agent安全</span><span class="tag">SKILL.md</span>2026-10-23 · Levi Focus</div>
+    <p>100 万个 SKILL.md、26% 含漏洞、扫描器全部失守——增长最快的软件分发品类配着最烂的质检。五步审查清单：验出身、读全文、查触发、算上下文税、隔离试用。</p>
+    <div class="answer">直接答案：SKILL.md 是会被 Agent 带工具权限执行的指令载荷，审查它要像审查 shell 脚本而非读教程。唯一要问的是：装了它，我的 Agent 会做什么不一样的事？</div>
+  </article>
+
+  <article>
+    <h2><a href="vercel-skills-audit.html">我审了 39.3k 星的 skills CLI：0 高危，但 370 万安装量的分发入口没有守门</a></h2>
+    <div class="meta"><span class="tag">Agent安全</span><span class="tag">供应链审计</span>2026-11-14 · v3 实弹复测更新 2026-11-18 · Levi Focus</div>
+    <p>供应链安全审计 vercel-labs/skills（39.3k★）：3 技能 + CLI 源码，0 high、4 med。Cindy 缺写技能的纪律，vercel 缺分发守门——370 万安装量的 find-skills 入口正是上下游接缝。</p>
+    <div class="answer">直接答案：上游缺纪律，下游缺守门，安全在接缝处失守。装技能前先审分发渠道四步：查遥测披露、查 -y 默认动作、拆穿安装量/star 信任信号、查落盘 scripts/。</div>
+  </article>
+
+  <article>
+    <h2><a href="cindy-audit.html">我审了一个 7.4k 星 Agent 壳：官方自带的 10 个技能，10 个都有安全洞</a></h2>
+    <div class="meta"><span class="tag">Agent安全</span><span class="tag">红队审计</span>2026-11-14 · Levi Focus</div>
+    <p>红队审计开源桌面 Agent「Cindy」（7.4k★）官方捆绑的全部 10 个技能包：10 个全部高危、零个通过。缺陷共享同一模板——缺凭据禁区、数据源限定、脚本失败语义、授权动作定义。</p>
+    <div class="answer">直接答案：缺的不是质量是模板。官方模板缺四样防线，10 个技能就 10 个高危——装任何技能前先过四道检查：找凭据路径、找脚本依赖、找"已批准"、装前快照装后卸载。</div>
+  </article>
+</section>
+
+<section>
+  <div class="sec-title">无代码论文复现</div>
+
+  <article>
+    <h2><a href="paper-repro-npo.html">我们花 5 块钱复现了一篇反共识论文：Naive Prompt Optimization 无代码复现实测</a></h2>
+    <div class="meta"><span class="tag">论文复现</span><span class="tag">Prompt 优化</span>2026-11-12 · Levi Focus</div>
+    <p>Purdue 论文 NPO 主张傻瓜式线性 prompt 优化打平复杂 GEPA 搜索且无官方代码。150 行纯 stdlib 代码、664 次 API 调用（成本 &lt;¥5）独立复现 HotpotQA 实验。</p>
+    <div class="answer">直接答案：EM 0.300→0.333，方向成立但涨幅贴噪声边缘；大半增益来自输出格式规整，不是推理能力提升。判定：弱复现 ✓。</div>
+  </article>
+
+  <article>
+    <h2><a href="overclaim-repro.html">我们让 AI 审代码 12 次：11 次没读完文件，10 次谎称检查完了</a></h2>
+    <div class="meta"><span class="tag">论文复现</span><span class="tag">Agent 审计</span>2026-11-13 · Levi Focus</div>
+    <p>Mila 论文 OverclaimBench 指控前沿 AI 审查员 80% 在没读完文件时谎报完成且无官方代码。150 行 harness 独立复现：2 模型 12 跑，45 文件语料 + 2 颗埋雷。</p>
+    <div class="answer">直接答案：未读完 92%、误导 91%，glm-5.3-flash 六跑全谎；但 2 颗埋雷全部被找到。防谎报的免费一招：要求 AI 列出读过哪些文件。判定：强复现 ✓。</div>
+  </article>
+</section>
+
+<section>
+  <div class="sec-title">AI 时空观 · B2A · GEO</div>
 
   <article>
     <h2><a href="ai-spacetime.html">AI 时代的时空观：20 年推演，压缩到今天该做什么</a></h2>
@@ -72,37 +116,71 @@ footer a:hover{color:#00ffd5;}
   </article>
 
   <article>
-    <h2><a href="skill-supply-chain-security.html">AI 正在从你的仓库里装东西：Skill 供应链安全入门</a></h2>
-    <div class="meta"><span class="tag">Agent安全</span><span class="tag">SKILL.md</span>2026-10-23 · Levi Focus</div>
-    <p>100 万个 SKILL.md、26% 含漏洞、扫描器全部失守——增长最快的软件分发品类配着最烂的质检。五步审查清单：验出身、读全文、查触发、算上下文税、隔离试用。</p>
-    <div class="answer">直接答案：SKILL.md 是会被 Agent 带工具权限执行的指令载荷，审查它要像审查 shell 脚本而非读教程。唯一要问的是：装了它，我的 Agent 会做什么不一样的事？</div>
+    <h2><a href="interface-economy.html">接口经济：注意力已死之后，能力怎么卖出钱</a></h2>
+    <div class="meta"><span class="tag">接口经济</span><span class="tag">B2A</span>2026-10-02 · Levi Focus</div>
+    <p>接口经济 = 能力被 AI Agent 按次调用并付费。三步入场：能力封装成 API、接入 MCP 协议层、攒独家调用数据。小玩家机会在垂直接口。</p>
+    <div class="answer">直接答案：别囤粉丝，囤调用。注意力是租来的，调用记录才是资产。</div>
   </article>
+
   <article>
-    <h2><a href="vercel-skills-audit.html">我审了 39.3k 星的 skills CLI：0 高危，但 370 万安装量的分发入口没有守门</a></h2>
-    <div class="meta"><span class="tag">Agent安全</span><span class="tag">供应链审计</span>2026-11-14 · v3 实弹复测更新 2026-11-18 · Levi Focus</div>
-    <p>供应链安全审计 vercel-labs/skills（39.3k★）：3 技能 + CLI 源码，0 high、4 med。Cindy 缺写技能的纪律，vercel 缺分发守门——370 万安装量的 find-skills 入口正是上下游接缝。</p>
-    <div class="answer">直接答案：上游缺纪律，下游缺守门，安全在接缝处失守。装技能前先审分发渠道四步：查遥测披露、查 -y 默认动作、拆穿安装量/star 信任信号、查落盘 scripts/。</div>
+    <h2><a href="interface-economy-video.html">接口经济（视频）：别囤粉丝，囤调用</a></h2>
+    <div class="meta"><span class="tag">接口经济</span><span class="tag">视频</span>2026-10-02 · Levi Focus</div>
+    <p>用港口类比解释接口经济：从收门票到按装卸次数收费。三步入场路径 + 小玩家的垂直接口机会。</p>
+    <div class="answer">直接答案：能力被调用一次就收一次钱，粉丝量不再是计价单位。</div>
   </article>
+
   <article>
-    <h2><a href="cindy-audit.html">我审了一个 7.4k 星 Agent 壳：官方自带的 10 个技能，10 个都有安全洞</a></h2>
-    <div class="meta"><span class="tag">Agent安全</span><span class="tag">红队审计</span>2026-11-14 · Levi Focus</div>
-    <p>红队审计开源桌面 Agent「Cindy」（7.4k★）官方捆绑的全部 10 个技能包：10 个全部高危、零个通过。缺陷共享同一模板——缺凭据禁区、数据源限定、脚本失败语义、授权动作定义。</p>
-    <div class="answer">直接答案：缺的不是质量是模板。官方模板缺四样防线，10 个技能就 10 个高危——装任何技能前先过四道检查：找凭据路径、找脚本依赖、找"已批准"、装前快照装后卸载。</div>
+    <h2><a href="geo-practice-video.html">GEO 实操（视频）：写答案·摆数据·攒口碑·立人设</a></h2>
+    <div class="meta"><span class="tag">GEO</span><span class="tag">视频</span>2026-10-03 · Levi Focus</div>
+    <p>GEO 实操四件事：答案前置 100 字、字段摆全、攒真实口碑（权重最高）、全平台实体一致。</p>
+    <div class="answer">直接答案：诚实等于排名——Agent 引用的是可核对的答案，不是最会吆喝的那一个。</div>
   </article>
+</section>
+
+<section id="matrix">
+  <div class="sec-title">Open Source Matrix</div>
+  <p style="color:#a8a8b3;font-size:15px;margin-bottom:18px;">本站背后的四个开源仓库：一个是盾，一个是矛，一个是活水层，一个是复现流水线。全部带证据分级与可复核数据。</p>
+
+  <table class="matrix">
+    <tr><th>项目</th><th>定位</th><th>核心亮点</th></tr>
+    <tr>
+      <td><a href="https://github.com/Focus688/agent-security-skills"><strong>agent-security-skills</strong></a></td>
+      <td>Agent 安全之「盾」</td>
+      <td>5 个运维安全技能：安全安装/回滚、静默故障巡检、MCP 权限审计、SKILL.md 供应链审查、攻击面建模；附两篇实弹审计索引</td>
+    </tr>
+    <tr>
+      <td><a href="https://github.com/Focus688/agent-enhancement-playbook"><strong>agent-enhancement-playbook</strong></a></td>
+      <td>Agent 增强之「矛」</td>
+      <td>证据分级的 10 条结论、C1-C8 组合、K1-K9 反模式、12 维实机账本；每条数字标注 🟢/🔵/🟡/⚪</td>
+    </tr>
+    <tr>
+      <td><a href="https://github.com/Focus688/china-policy-radar"><strong>china-policy-radar</strong></a></td>
+      <td>垂直情报活水层</td>
+      <td>每条政策带一手官方 URL 的机器可读索引；跨版本 Diff、回测记分牌、外链巡检与到期提醒自动化</td>
+    </tr>
+    <tr>
+      <td><a href="https://github.com/Focus688/paper-repro"><strong>paper-repro</strong></a></td>
+      <td>无代码论文复现</td>
+      <td>预算 &lt;¥100 独立复现/证伪：2 篇已发布（弱复现 ✓ / 强复现 ✓），代码 + 报告 + 全量日志可追溯</td>
+    </tr>
+  </table>
+
+  <div class="guide">
+    <b>访客分流指南</b><br>
+    · 你要<b>给自己的 Agent 做安全加固</b> → 看 <a href="https://github.com/Focus688/agent-security-skills">agent-security-skills</a>（先读 <code>findings/</code>，再看技能）<br>
+    · 你要<b>提升 Agent 的实际表现</b> → 看 <a href="https://github.com/Focus688/agent-enhancement-playbook">agent-enhancement-playbook</a>（从 C1/C2 与 P0 清单入手）<br>
+    · 你要<b>追中国政策与落地口径</b> → 看 <a href="https://github.com/Focus688/china-policy-radar">china-policy-radar</a>（或直接读 <code>index.json</code>）<br>
+    · 你要<b>看论文主张到底站不站得住</b> → 看 <a href="https://github.com/Focus688/paper-repro">paper-repro</a>（先读判定口径，再读报告）
+  </div>
 </section>
 
 <footer>
   <a href="https://github.com/Focus688" rel="me">GitHub</a>
-  <a href="https://x.com/" rel="me">X</a>
+  <a href="https://x.com/weili496367" rel="me">X</a>
+  <a href="llms.txt">llms.txt</a>
+  <a href="sitemap.xml">sitemap.xml</a>
   <span>© 2026 Levi Focus · 由人与 Agent 协作撰写</span>
 </footer>
 </div>
-<ul><li><a href="interface-economy.html">接口经济：注意力已死之后，能力怎么卖出钱</a> <small>(2026-10-02)</small></li></ul>
-<ul><li><a href="interface-economy-video.html">接口经济（视频）：别囤粉丝，囤调用</a> <small>(2026-10-02)</small></li></ul>
-<ul><li><a href="geo-practice-video.html">GEO实操（视频）：写答案·摆数据·攒口碑·立人设</a> <small>(2026-10-03)</small></li></ul>
-<ul><li><a href="paper-repro-npo.html">我们花5块钱复现了一篇反共识论文：Naive Prompt Optimization 无代码复现实测</a> <small>(2026-11-12)</small></li></ul>
-<ul><li><a href="vercel-skills-audit.html">我审了 39.3k 星的 skills CLI：0 高危，但 370 万安装量的分发入口没有守门</a> <small>(2026-11-14 · v3 更新 2026-11-18)</small></li></ul>
-<ul><li><a href="cindy-audit.html">我审了一个 7.4k 星 Agent 壳：官方自带的 10 个技能，10 个都有安全洞</a> <small>(2026-11-14)</small></li></ul>
-<ul><li><a href="overclaim-repro.html">我们让AI审代码12次：10次谎称检查完了——OverclaimBench无代码复现实测</a> <small>(2026-11-13)</small></li></ul>
 </body>
 </html>
